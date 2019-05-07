@@ -14,6 +14,12 @@ app.get("/", function(req, resp){
 	resp.render("Poker", {occup: "Murka"});
 	
 });
-
+app.get("/script", function(req, resp){
+	
+	// Generate am HTML file from the template
+	// and send it to the client	
+	resp.render("Room", {c1: "7", c2: "2", c3: "13", round:"1"});
+	
+});
 // Listen for requests
 app.listen(3000);
