@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Secure Room</title>
+<title>Secure Poker</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -17,14 +17,13 @@ body, html {
 </style>
 <body>
 
-<!-- Links (sit on top) -->
-<div class="w3-top">
-  <div class="w3-row w3-padding w3-black">
-    <div class="w3-col s3">
-      <a href="home" class="w3-button w3-block w3-black">HOME</a>
+  <div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s3">
+        <a href="home2" class="w3-button w3-block w3-black">HOME</a>
+      </div>
     </div>
   </div>
-</div>
 
 
 <!-- Add a background color and large text to the whole page -->
@@ -35,17 +34,8 @@ body, html {
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">POKER</span></h5>
     <div class="w3-panel w3-leftbar w3-light-grey">
-      <p><i>Make Your Choice</i></p>
-    </div>
-    <div class="w3-panel w3-leftbar w3-light-grey">
-      Round <%= round%>! Fight!
-        <form action="google.com">
-          <input type="radio" name="select" value="<%= sess %><%= c1 %>">&nbsp&nbsp&nbsp&nbsp<%= c1 %><br>
-          <input type="radio" name="select" value="<%= sess %><%= c2 %>">&nbsp&nbsp&nbsp&nbsp<%= c2 %><br>
-          <input type="radio" name="select" value="<%= sess %><%= c3 %>">&nbsp&nbsp&nbsp&nbsp<%= c3 %><br>
-        
-            <input type="submit" value="send">
-        </form>
+      <p><i>Room is Full</i></p>
+      <p><i>Please go back to the home page</i></p>
     </div>
   </div>
 </div>
@@ -58,3 +48,5 @@ body, html {
 </footer>
 </body>
 </html>
+
+
