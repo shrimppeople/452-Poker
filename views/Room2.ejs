@@ -37,16 +37,13 @@ body, html {
     <div class="w3-panel w3-leftbar w3-light-grey">
       <p><i>Make Your Choice</i></p>
     </div>
-    <%= sess %><%= c1 %>
-          <%= sess %><%= c2 %>
-          <%= sess %><%= c3 %>
     <div class="w3-panel w3-leftbar w3-light-grey">
       Round <%= round%>! Fight!
-        <form action="/room2" method="POST">
-          <input type="radio" name="select" id="c1" value="79">&nbsp&nbsp&nbsp&nbsp<%= c1 %><br>
-          <input type="radio" name="select" id="c2" value="<%= sess %><%= c2 %>">&nbsp&nbsp&nbsp&nbsp<%= c2 %><br>
-          <input type="radio" name="select" id="c3" value="<%= sess %><%= c3 %>">&nbsp&nbsp&nbsp&nbsp<%= c3 %><br>
-          <input type="text" id="test" >
+        <form action="/room" method="POST">
+          <input type="radio" name="select" value="<%= sess %><%= c1 %>">&nbsp&nbsp&nbsp&nbsp<%= c1 %><br>
+          <input type="radio" name="select" value="<%= sess %><%= c2 %>">&nbsp&nbsp&nbsp&nbsp<%= c2 %><br>
+          <input type="radio" name="select" value="<%= sess %><%= c3 %>">&nbsp&nbsp&nbsp&nbsp<%= c3 %><br>
+        
             <input type="submit" value="send">
         </form>
     </div>

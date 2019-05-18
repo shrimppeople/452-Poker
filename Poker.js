@@ -21,14 +21,26 @@ app.get("/room", function(req, resp){
 	
 	players.push("1");	
 	var cards = deal_cards();
-	resp.render("Room", {c1: cards[0], c2: cards[1], c3: cards[2], round:"1", });
-	
+	var id = key();
+	resp.render("Room", {c1: cards[0], c2: cards[1], c3: cards[2], round:"1", sess: id});
+});
+app.post("/room2", function(req, resp){
+	var temp = req.query[test];
+	console.log(temp);
+	var cards = deal_cards();
+	var id = key();
+	resp.render("Room", {c1: cards[0], c2: cards[1], c3: cards[2], round:"1", sess: id});
 });
 app.get("/full", function(req, resp){
 	
 	resp.render("Full");
 	
 });
+function key()
+{
+	var key = "10101";
+	return key;
+}
 function compare(a,b)
 {
     if (a >= b) return true
