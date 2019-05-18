@@ -1,5 +1,7 @@
 // Import express
 var express = require('express');
+//Import Body Parser
+var bodyParser = require('body-parser');
 // Create an instance of the app
 var app = express();
 var players =["0"];
