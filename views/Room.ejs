@@ -21,7 +21,7 @@ body, html {
 <div class="w3-top">
   <div class="w3-row w3-padding w3-black">
     <div class="w3-col s3">
-      <a href="home" class="w3-button w3-block w3-black">HOME</a>
+      <a href="/home" class="w3-button w3-block w3-black">HOME</a>
     </div>
   </div>
 </div>
@@ -37,17 +37,13 @@ body, html {
     <div class="w3-panel w3-leftbar w3-light-grey">
       <p><i>Make Your Choice</i></p>
     </div>
-    <%= sess %><%= c1 %>
-          <%= sess %><%= c2 %>
-          <%= sess %><%= c3 %>
     <div class="w3-panel w3-leftbar w3-light-grey">
       Round <%= round%>! Fight!
-        <form action="/room2" method="POST">
-          <input type="radio" name="select" id="c1" value="79">&nbsp&nbsp&nbsp&nbsp<%= c1 %><br>
+        <form action="<%= room%>" method="POST">
+          <input type="radio" name="select" id="c1" value="<%= sess %><%= c1 %>">&nbsp&nbsp&nbsp&nbsp<%= c1 %><br>
           <input type="radio" name="select" id="c2" value="<%= sess %><%= c2 %>">&nbsp&nbsp&nbsp&nbsp<%= c2 %><br>
           <input type="radio" name="select" id="c3" value="<%= sess %><%= c3 %>">&nbsp&nbsp&nbsp&nbsp<%= c3 %><br>
-          <input type="text" id="test" >
-            <input type="submit" value="send">
+          <input type="submit" value="send">
         </form>
     </div>
   </div>

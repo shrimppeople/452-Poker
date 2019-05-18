@@ -21,7 +21,7 @@ body, html {
 <div class="w3-top">
   <div class="w3-row w3-padding w3-black">
     <div class="w3-col s3">
-      <a href="home" class="w3-button w3-block w3-black">HOME</a>
+      <a href="/home" class="w3-button w3-block w3-black">HOME</a>
     </div>
   </div>
 </div>
@@ -35,17 +35,12 @@ body, html {
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">POKER</span></h5>
     <div class="w3-panel w3-leftbar w3-light-grey">
-      <p><i>Make Your Choice</i></p>
+      <p><i><%= message%></i></p>
     </div>
     <div class="w3-panel w3-leftbar w3-light-grey">
-      Round <%= round%>! Fight!
-        <form action="/room" method="POST">
-          <input type="radio" name="select" value="<%= sess %><%= c1 %>">&nbsp&nbsp&nbsp&nbsp<%= c1 %><br>
-          <input type="radio" name="select" value="<%= sess %><%= c2 %>">&nbsp&nbsp&nbsp&nbsp<%= c2 %><br>
-          <input type="radio" name="select" value="<%= sess %><%= c3 %>">&nbsp&nbsp&nbsp&nbsp<%= c3 %><br>
-        
-            <input type="submit" value="send">
-        </form>
+      Your hand was: <%= yhand%>!<br>
+      Your opponents hand was: <%= ohand%>
+
     </div>
   </div>
 </div>
