@@ -2,13 +2,16 @@
 var express = require('express');
 //Import Body Parser
 var bodyParser = require('body-parser');
-
+var forge = require("node-forge");
 var S = require('string');
+var bigInt = require("big-integer");
 // Create an instance of the app
 var app = express();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var players =["0"];
 var player1 =[];
+var player1R = [];
+var player2R = [];
 var player2 =[];
 var win = "Congrats you WON!!!!!!! *throws confetti";
 var lose = "Bummer you lose.";
@@ -36,11 +39,41 @@ app.get("/room", function(req, resp){
 	players.push("1");	
 	var cards = deal_cards();
 	var id = key();
+	var sess = session_key();
+	var sess_key = sess[0];
+	var iv = sess[1];
 	pnum = players.length-1;
+
+	//Utilizing RSA Public-Private key encryption
+	//Defining our RSA object
+	var rsa = forge.pki.rsa;
+
+	//Creating Public-Private key pair
+	var keypair = rsa.generateKeyPair({bits:2048, e:0x10001});
+	console.log("\n")
+	console.log("original session key: ",sess_key);
+
+	//Encrypting the key pair with servers public key
+	var encrypted_session = keypair.publicKey.encrypt(sess_key);
+	console.log("encrypted session key:", encrypted_session)
+	console.log("\n")
+	
+	//Server is decrypting encrypted session key
+	var decrypted_session = keypair.privateKey.decrypt(encrypted_session);
+	console.log("decrypted session key: ",decrypted_session);
+	console.log("\n\n")
+
+	//Saving player variables in the correct array
 	if(pnum === 1){
 		player1.push(id);
+		player1R.push(id);
+		player1R.push(sess_key);
+		player1R.push(iv);
 	}else{
 		player2.push(id)
+		player2R.push(id);
+		player2R.push(sess_key);
+		player2R.push(iv);
 	}
 	resp.render("Room", {c1: cards[0], c2: cards[1], c3: cards[2], round:"1", sess: id, room:"/room2"});
 });
@@ -74,8 +107,7 @@ app.post("/room2", urlencodedParser, function(req, resp){
 			}
 		}
 	}
-	console.log(player1);
-	console.log(player2);
+
 	var cards = deal_cards();
 	resp.render("Room", {c1: cards[0], c2: cards[1], c3: cards[2], round:"2", sess: id,room:"/room3"});
 });
@@ -109,8 +141,7 @@ app.post("/room3", urlencodedParser, function(req, resp){
 			}
 		}
 	}
-	console.log(player1);
-	console.log(player2);
+
 	var cards = deal_cards();
 	resp.render("Room", {c1: cards[0], c2: cards[1], c3: cards[2], round:"3", sess: id,room:"/room4"});
 });
@@ -144,17 +175,14 @@ app.post("/room4", urlencodedParser, function(req, resp){
 			}
 		}
 	}
-	console.log(player1);
-	console.log(player2);
+	
 	if(player1.length === player2.length){
 		standing1 = winCount("1");
 		standing2 = winCount("2");
-		console.log(standing1);
-		console.log(standing2);
+
 		check1 = winCheck(standing1);
 		check2 = winCheck(standing2);
-		console.log(check1);
-		console.log(check2);
+
 		if(check1 === true){
 			if(par1 === player1[0]){
 				yhand = [player1[1], player1[3], player1[5]];
@@ -232,6 +260,21 @@ function key()
 	}
 
 	return key;
+}
+function session_key()
+{
+    var length = 16;
+		var id = '';
+		var iv = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++ ) {
+       id += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		for (var i = 0; i < length; i++ ) {
+			iv += characters.charAt(Math.floor(Math.random() * charactersLength));
+	 }
+    return [iv, id];
 }
 function compare(a,b)
 {
